@@ -1,6 +1,10 @@
 import { useMemo } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom"
+import { heroImages } from "../../helpers/heroImages";
 import { getHeroById } from "../selectors/getHeroById";
+
+// Images
+// import green  from "../../assets/dc-green.jpg"; // recurso estático
 
 
 export const HeroScreen = () => {
@@ -30,12 +34,16 @@ export const HeroScreen = () => {
         characters,
     } = hero;
 
-    const imagePath = `/assets/${id}.jpg`;
+    // desde public/assest
+    {/*const imagePath = `/assets/${id}.jpg`;*/}
+
 
     return (
         <div className="row mt-5">
             <div className="col-4 ">
-                <img src={imagePath}
+                <img 
+                    // src={green} // import
+                    src={ heroImages(`./${ heroeId }.jpg`) }
                     alt={superhero}
                     className="img-thumbnail animate__animated animate__fadeInLeft"
                 />
