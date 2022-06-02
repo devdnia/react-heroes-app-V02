@@ -1,14 +1,34 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../auth/authContext";
+import { types } from "../../types/types";
+
 
 export const LoginScreen = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = () =>{
+    const { dispatch } = useContext(AuthContext);
+
+    const handleLogin = () => {
+
+        const action = {
+            types: types.login,
+            payload: {
+                name: "Ivan",
+            }
+        }
+
+        dispatch(action);
+
+        // Ultima lastPath
+        const lastPath = localStorage.getItem('lastPath') || 'marvel';
+        
         // mediante el atributo replace : true no se vuelve al login
-        navigate('/' ,{
+        navigate(lastPath, {
             replace: true
         });
+
     }
 
     return (
@@ -18,7 +38,7 @@ export const LoginScreen = () => {
 
             <button
                 className="btn btn-primary"
-                onClick={ handleLogin }
+                onClick={handleLogin}
             >
                 Login
             </button>
